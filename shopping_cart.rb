@@ -73,9 +73,10 @@ class Cart
     if @choice.to_i == 1
     
       if !@cart_items["Duck"]
+      
+      @cart_items["Duck"] = 0
+      @cart_items["Duck"] += @num_items.to_i
     
-        @cart_items["Duck"] = 0
-        @cart_items["Duck"] += @num_items.to_i
       else
     
         @cart_items["Duck"] += @num_items.to_i
@@ -146,14 +147,14 @@ class Cart
     counter_ribs = 0
 
     order_detail_string
+
+    @items_list.each do |item|
+        
+      
+      @cart_items.each do |cart_item|
   
-    @cart_items.each do |cart_item|
-      puts(cart_item)
-  
-      if !cart_item.nil?
-  
-        @items_list.each do |item|
-  
+        if !cart_item.nil?
+
           if counter_duck == 0
   
             if item.name == "Duck" && !@cart_items["Duck"].nil?
@@ -218,7 +219,7 @@ class Cart
 
             end
           end
-          
+
         end
       
       end
