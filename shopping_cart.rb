@@ -1,5 +1,3 @@
-
-
 class Item
   attr_reader :name, :price
     
@@ -13,7 +11,7 @@ def select_more_items
     print"Do you want to add more items to your cart? \n y/n \n"
     keep_going = gets.chomp
     if keep_going == 'y'
-        add_item
+        self.add_item
         else
         keep_going = 'n'
         @add_more_items = 'n'
@@ -61,7 +59,7 @@ class Cart
     
   @cart_items = Hash.new
     
-  def add_item
+  def self.add_item
     
     pick_item
     
@@ -122,91 +120,97 @@ class Cart
 
   end
 
+def self.items
+@total_value = 0
+
+
+@items_list = [ Item.new("Duck", 10),
+Item.new("Turkey", 5),
+Item.new("Beef", 8.99),
+Item.new("Lobster", 12.99),
+Item.new("Ribs", 7.99)]
+
+self.total
+
+
+end
+
   def self.total
+  counter_duck = 0
+  counter_turkey = 0
+  counter_beef = 0
+  counter_lobster = 0
+  counter_ribs = 0
+  
+  @cart_items.each do |cart_item|
+  
+  if !cart_item.nil?
+  
+  @items_list.each do |item|
+  
+  if counter_duck == 0
+  
+  if item.name == "Duck" && !@cart_items["Duck"].nil?
+  
+  item_value = item.price * @cart_items["Duck"]
+  @total_value += item_value
+  counter_duck += 1
+end
+end
+if counter_turkey == 0
+    
+    if item.name == "Turkey" && !@cart_items["Turkey"].nil?
+        
+        item_value = item.price * @cart_items["Turkey"]
+        @total_value += item_value
+        counter_turkey += 1
+    end
+end
+if counter_beef == 0
+    
+    if item.name == "Beef" && !@cart_items["Beef"].nil?
+        
+        item_value = item.price * @cart_items["Beef"]
+        @total_value += item_value
+        counter_beef += 1
+    end
+end
+if counter_lobster == 0
+    
+    if item.name == "Lobster" && !@cart_items["Lobster"].nil?
+        
+        item_value = item.price * @cart_items["Lobster"]
+        @total_value += item_value
+        counter_lobster += 1
+    end
+end
+if counter_ribs == 0
+    
+    if item.name == "Ribs" && !@cart_items["Ribs"].nil?
+        
+        item_value = item.price * @cart_items["Ribs"]
+        @total_value += item_value
+        counter_ribs += 1
+    end
+end
+end
+end
+
+
+
+
     printf("The total amount of items in your cart is $%.2f\n",
        @total_value)
     exit
   end
 
-  def self.items
-    @total_value = 0
-
-
-    @items_list = [ Item.new("Duck", 10),
-                    Item.new("Turkey", 5),
-                    Item.new("Beef", 8.99),
-                    Item.new("Lobster", 12.99),
-                    Item.new("Ribs", 7.99)]
-
-    counter_duck = 0
-    counter_turkey = 0
-    counter_beef = 0
-    counter_lobster = 0
-    counter_ribs = 0
-
-    @cart_items.each do |cart_item|
-    
-    if !cart_item.nil?
-        
-        @items_list.each do |item|
-            
-          if counter_duck == 0
-                
-            if item.name == "Duck" && !@cart_items["Duck"].nil?
-                
-              item_value = item.price * @cart_items["Duck"]
-              @total_value += item_value
-              counter_duck += 1
-            end
-          end
-          if counter_turkey == 0
-                
-            if item.name == "Turkey" && !@cart_items["Turkey"].nil?
-                
-              item_value = item.price * @cart_items["Turkey"]
-              @total_value += item_value
-              counter_turkey += 1
-            end
-          end
-          if counter_beef == 0
-                
-            if item.name == "Beef" && !@cart_items["Beef"].nil?
-                    
-              item_value = item.price * @cart_items["Beef"]
-              @total_value += item_value
-              counter_beef += 1
-            end
-          end
-          if counter_lobster == 0
-                
-            if item.name == "Lobster" && !@cart_items["Lobster"].nil?
-                    
-              item_value = item.price * @cart_items["Lobster"]
-              @total_value += item_value
-              counter_lobster += 1
-            end
-          end
-          if counter_ribs == 0
-                
-            if item.name == "Ribs" && !@cart_items["Ribs"].nil?
-                    
-              item_value = item.price * @cart_items["Ribs"]
-              @total_value += item_value
-              counter_ribs += 1
-            end
-          end
-        end
-    end
-  end
-
-  self.total
 
   end
 
 
   while @add_more_items == 'y'
     
-    add_item
+    self.add_item
     
   end  # end while loop
 
