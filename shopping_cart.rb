@@ -53,6 +53,13 @@ def number_item_select
   end
 end
 
+def order_detail_string
+  puts("Order Details")
+
+end
+
+
+
 class Cart
     
   @add_more_items = 'y'
@@ -94,7 +101,7 @@ class Cart
         @cart_items["Beef"] += @num_items.to_i
       end
 
-    elsif @choice == 4
+    elsif @choice.to_i == 4
       if !@cart_items["Lobster"]
           
         @cart_items["Lobster"] = 0
@@ -104,7 +111,7 @@ class Cart
         @cart_items["Lobster"] += @num_items.to_i
       end
 
-    elsif @choice == 5
+    elsif @choice.to_i == 5
       if !@cart_items["Ribs"]
           
         @cart_items["Ribs"] = 0
@@ -120,92 +127,108 @@ class Cart
 
   end
 
-def self.items
-@total_value = 0
+  def self.items
+    @total_value = 0
 
-
-@items_list = [ Item.new("Duck", 10),
-Item.new("Turkey", 5),
-Item.new("Beef", 8.99),
-Item.new("Lobster", 12.99),
-Item.new("Ribs", 7.99)]
-
-self.total
-
-
-end
+    @items_list = [ Item.new("Duck", 10),
+                    Item.new("Turkey", 5),
+                    Item.new("Beef", 8.99),
+                    Item.new("Lobster", 12.99),
+                    Item.new("Ribs", 7.99)]
+    self.total
+  end
 
   def self.total
-  counter_duck = 0
-  counter_turkey = 0
-  counter_beef = 0
-  counter_lobster = 0
-  counter_ribs = 0
+    counter_duck = 0
+    counter_turkey = 0
+    counter_beef = 0
+    counter_lobster = 0
+    counter_ribs = 0
+
+    order_detail_string
   
-  @cart_items.each do |cart_item|
+    @cart_items.each do |cart_item|
+      puts(cart_item)
   
-  if !cart_item.nil?
+      if !cart_item.nil?
   
-  @items_list.each do |item|
+        @items_list.each do |item|
   
-  if counter_duck == 0
+          if counter_duck == 0
   
-  if item.name == "Duck" && !@cart_items["Duck"].nil?
+            if item.name == "Duck" && !@cart_items["Duck"].nil?
+              @current_item = "Duck"
   
-  item_value = item.price * @cart_items["Duck"]
-  @total_value += item_value
-  counter_duck += 1
-end
-end
-if counter_turkey == 0
+              @item_value = item.price * @cart_items["Duck"]
+              @total_value += @item_value
+              counter_duck += 1
+              
+              printf(item.name + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+            end
+          end
+          if counter_turkey == 0
     
-    if item.name == "Turkey" && !@cart_items["Turkey"].nil?
-        
-        item_value = item.price * @cart_items["Turkey"]
-        @total_value += item_value
-        counter_turkey += 1
-    end
-end
-if counter_beef == 0
+            if item.name == "Turkey" && !@cart_items["Turkey"].nil?
+              @current_item = "Turkey"
+
+              @item_value = item.price * @cart_items["Turkey"]
+              @total_value += @item_value
+              counter_turkey += 1
+              
+              printf(item.name + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+
+            end
+          end
+          if counter_beef == 0
     
-    if item.name == "Beef" && !@cart_items["Beef"].nil?
-        
-        item_value = item.price * @cart_items["Beef"]
-        @total_value += item_value
-        counter_beef += 1
-    end
-end
-if counter_lobster == 0
+            if item.name == "Beef" && !@cart_items["Beef"].nil?
+              @current_item = "Beef"
+
+              @item_value = item.price * @cart_items["Beef"]
+              @total_value += @item_value
+              counter_beef += 1
+              
+              printf(item.name + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+
+            end
+          end
+          if counter_lobster == 0
     
-    if item.name == "Lobster" && !@cart_items["Lobster"].nil?
-        
-        item_value = item.price * @cart_items["Lobster"]
-        @total_value += item_value
-        counter_lobster += 1
-    end
-end
-if counter_ribs == 0
+            if item.name == "Lobster" && !@cart_items["Lobster"].nil?
+              @current_item = "Lobster"
+
+              @item_value = item.price * @cart_items["Lobster"]
+              @total_value += @item_value
+              counter_lobster += 1
+              
+              printf(item.name + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+
+            end
+          end
+          if counter_ribs == 0
     
-    if item.name == "Ribs" && !@cart_items["Ribs"].nil?
-        
-        item_value = item.price * @cart_items["Ribs"]
-        @total_value += item_value
-        counter_ribs += 1
-    end
-end
-end
-end
+            if item.name == "Ribs" && !@cart_items["Ribs"].nil?
+              @current_item = "Ribs"
+
+              @item_value = item.price * @cart_items["Ribs"]
+              @total_value += @item_value
+              counter_ribs += 1
+              
+              printf(item.name + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+
+            end
+          end
+          
+        end
+      
+      end
 
 
-
-
-    printf("The total amount of items in your cart is $%.2f\n",
+    end
+    printf("Total: $%.2f\n",
        @total_value)
     exit
-  end
-
-
-  end
+  end # end of self.total
 
 
   while @add_more_items == 'y'
@@ -215,4 +238,8 @@ end
   end  # end while loop
 
 end
+
+#def total_string_item
+#    printf(@current_item + ": " + item.price.to_s + " x " + @cart_items[@current_item].to_s + " = $%.2f\n", @item_value)
+#end
 
