@@ -7,6 +7,10 @@ class Item
   end
 end
 
+# bph 
+# You want to try to keep the objects separate from your user interface. 
+# So methods like this one don't do that.
+
 def select_more_items
     print"Do you want to add more items to your cart? \n y/n \n"
     keep_going = gets.chomp
@@ -19,6 +23,9 @@ def select_more_items
     end
 end
 
+# Same here - you want this to be part of the UI, not the item.
+# You want to think about the Single Responsibility Principle.
+# Each object should only do one thing.
 def pick_item
     
     print "What item would you like to add to your cart?\n Type a number to select the item \n 1: Duck\n 2: Turkey\n 3: Beef\n 4: Lobster\n 5: Ribs\n"
@@ -26,6 +33,8 @@ def pick_item
     number_item_select
 end
 
+# This could be done with a hash/dict/map instead. And it should
+# also not be here - it should be in a UI class.
 def number_item_select
   if @choice.to_i == 1
     print "How many piece of Duck do you want to add to your cart?"
@@ -66,6 +75,11 @@ class Cart
     
   @cart_items = Hash.new
     
+  # You are using self. as a prefix. This doesn't
+  # allow for instances of your cart. You want instance
+  # methods instead.
+  
+  
   def self.add_item
     
     pick_item
